@@ -1,0 +1,15 @@
+GET http://localhost:8080/list
+Accept: application/json
+
+###
+POST http://localhost:8080/uploadMultipart
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="sample-15s.mp3"
+
+< mp3/sample-15s.mp3
+--WebAppBoundary--
+
+###
+
