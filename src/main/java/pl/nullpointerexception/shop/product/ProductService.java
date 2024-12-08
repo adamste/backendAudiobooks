@@ -1,14 +1,11 @@
-package pl.nullpointerexception.shop.product.service;
+package pl.nullpointerexception.shop.product;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.nullpointerexception.shop.product.model.Product;
-import pl.nullpointerexception.shop.product.repository.ProductRepository;
 
 import java.util.List;
 
 @Service
-public class ProductService {
+class ProductService {
 
     private final ProductRepository productRepository;
 
@@ -16,7 +13,7 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public List<Product> getProducts() {
+    public List<Book> getProducts() {
         return productRepository.findAll();
     }
 }
