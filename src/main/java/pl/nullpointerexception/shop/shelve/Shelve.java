@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
@@ -27,8 +28,8 @@ public class Shelve {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
     private String type;
-    @OneToMany
-    @JoinColumn(name = "book_id")
+    @ManyToMany
     private Set<Book> book;
 }

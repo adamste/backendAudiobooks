@@ -5,13 +5,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pl.nullpointerexception.shop.product.Book;
-import pl.nullpointerexception.shop.product.ProductRepo;
+import pl.nullpointerexception.shop.product.BookRepo;
 import pl.nullpointerexception.shop.shelve.Shelve;
 import pl.nullpointerexception.shop.shelve.ShelveRepo;
 import pl.nullpointerexception.shop.user.UserRepo;
 
 import java.math.BigDecimal;
 
+import java.util.List;
 import java.util.Set;
 
 @SpringBootApplication
@@ -20,7 +21,7 @@ public class ShopApplication implements CommandLineRunner {
     @Autowired
     private UserRepo userRepo;
     @Autowired
-    private ProductRepo prodRepo;
+    private BookRepo bookRepo;
     @Autowired
     private ShelveRepo shelveRepo;
 
@@ -29,24 +30,34 @@ public class ShopApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
-
+    public void run(String... args) {
         Book book = new Book();
         book.setCategory("Kryminiał");
         book.setName("Ojciec Mateusz");
         book.setPrice(BigDecimal.TEN);
         book.setCurrency("PLN");
         book.setDescription("fajne");
-        prodRepo.save(book);
+
+        Book book2 = new Book();
+        book2.setCategory("Horror");
+        book2.setName("Ostatni krok");
+        book2.setPrice(BigDecimal.ONE);
+        book2.setCurrency("PLN");
+        book2.setDescription("Przerażająca opowieść");
+
+        Book book3 = new Book();
+        book3.setCategory("Powieść");
+        book3.setName("Opowieść wigilijna");
+        book3.setPrice(BigDecimal.TEN);
+        book3.setCurrency("PLN");
+        book3.setDescription("Klasyk Dickensa");
+        bookRepo.saveAll(List.of(book, book2, book3));
 
         Shelve shelve = new Shelve();
         shelve.setType("Przeczytane");
-        shelve.setBook(Set.of(book));
+        shelve.setBook(Set.of(book, book2, book3));
         shelve.setUser(userRepo.findById(1L).get());
         shelveRepo.save(shelve);
-
-
-
 
 
         //		String directoryPath = "/Users/adam.stepien/IdeaProjects/kursNPE/KursAplikacjiBackend-783b8ef41e38f07c99df396a489bd03cf2c625b5/request/mp3/";
